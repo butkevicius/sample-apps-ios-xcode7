@@ -1,0 +1,46 @@
+fastlane_version "1.49.0"
+
+default_platform :ios
+
+platform :ios do
+  before_all do
+    # ENV["SLACK_URL"] = "https://hooks.slack.com/services/..."
+    #ENV["CONFIGURATION_BUILD_DIR"] = "build/"
+    # increment_build_number
+  end
+
+  desc "Runs all the tests"
+  lane :test do
+    # snapshot
+    	xctool :test
+  end
+
+  desc "Analysis"
+  lane :analysis do
+      #swiftlint(output_file: 'build/swiftlint')
+
+      gcovr(
+        object_directory: "build/BitriseXcode7Sample.build/Debug-iphonesimulator/BitriseXcode7Sample.build/Objects-normal/i386",
+        output: "build/gcovr.html",
+        html: true,
+        html_details: true
+      )
+  end
+
+
+
+  after_all do |lane|
+    # This block is called, only if the executed lane was successful
+    
+    # slack(
+    #   message: "Successfully deployed new App Update."
+    # )
+  end
+
+  error do |lane, exception|
+    # slack(
+    #   message: exception.message,
+    #   success: false
+    # )
+  end
+end

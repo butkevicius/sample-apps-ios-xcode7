@@ -1,0 +1,5 @@
+[
+	"-scheme", "BitriseXcode7Sample",
+	"-project", "BitriseXcode7Sample.xcodeproj",
+	"-sdk", "iphonesimulator"
+]

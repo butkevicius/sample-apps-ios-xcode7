@@ -1,0 +1,3 @@
+included:
+  - BitriseXcode7Sample
+reporter: "csv"
